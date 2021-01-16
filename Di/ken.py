@@ -37,23 +37,23 @@ def lv():
 
 
     def on_error(ws, error):
-        print('Error:{}'.format(error))
+        
 
     def on_close(ws):
-        print('再接続')
+   
         main()
     
     def on_open(ws):
         def run(*args):
-            print('Open')
+           
             for i in range(3):
                 time.sleep(1)
                 message = "Hello " + str(i)
                 ws.send(message)
-                print('Sent:{}'.format(message))
+               
             time.sleep(1)
             ws.close()
-            print('Thread terminating...')
+            
             threading.start_new_thread(run, ())
 
 
