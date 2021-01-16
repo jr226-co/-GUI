@@ -18,6 +18,7 @@ import kins
 import jr
 import sys
 import ken
+import ziso
 
 ame = []
 zi = []
@@ -94,7 +95,7 @@ def loop_a():
 
         if event == "自動":
             Process(target=loop_b).start()
-            jr.jr()
+            
         if event == "更新":
             for (a, b,c) in zip(bann ,zen_URL,zen_syu):           
                 news_dic = feedparser.parse(b)
@@ -164,13 +165,16 @@ def loop_b():
                         sindo.zisin(latest_entry.link)
                     elif latest_entry.title in soku:
                         zisin.sokuhou(latest_entry.link)
-                    zen_nai[a] = ta
-                        
-                    notification.notify(
+                    
+                    if zen_nai[a] == "0":
+                        pass
+                    else:    
+                        notification.notify(
                             title=f'{rss1}',
                             message=f' {textwrap.fill(rss2[0]["value"], 1000)}',
                             app_name='アプリ名だよ',    
                         )
+                    zen_nai[a] = ta
             except:
                 print("エラー:")
                 print(b)
@@ -185,14 +189,28 @@ def loop_b():
 
 
 
+def jrs():
+    jr.jr()
+def kens():
+    ken.lv()
+def zisos():
+    ziso.hi()
 
             
 
 if __name__ == '__main__':
-    Process(target=loop_a).start()   
-    kins.kin() 
-    ken.lv()
+    Process(target=loop_a).start() 
+    Process(target=jrs).start() 
+    Process(target=kens).start()     
+    Process(target=zisos).start()   
+
     
+    
+    
+    
+
+
+
     
     
 
